@@ -8,5 +8,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [mdx()],
-  site: "https://example.com"
+  site: "https://blog.serel.dev"
 });
