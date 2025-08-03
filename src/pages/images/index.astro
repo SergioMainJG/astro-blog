@@ -1,0 +1,65 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { Image, Picture } from "astro:assets";
+
+import post05Img from "@images/post-05.png";
+---
+
+<MainLayout title="Images">
+  <h1 class="text-5xl text-white">Imágenes</h1>
+  <img
+    width="250"
+    height="250"
+    src="/assets/post-05.png"
+    title="Portada del post 5"
+    alt="Portada del post 5"
+  />
+
+  <!-- src="/assets/post-04.png" -->
+  <!-- width="250 -->
+  <!-- height="250" -->
+  <Image
+    width="250"
+    height="250"
+    src={post05Img}
+    title="Portada del post 4"
+    alt="Portada del post 4"
+    style={{
+      height: "500px",
+      width: "500px",
+    }}
+    quality="low"
+    format="avif"
+  />
+  
+  <!-- widths={[240, 540, 720, post05Img.width]} -->
+  <Picture
+    width="250"
+    height="250"
+    src={post05Img}
+    title="Portada del post 4"
+    alt="Portada del post 4"
+    sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${post05Img.width}px`}
+    quality="low"
+    formats={[
+        'webp','avif','jpg'
+    ]}
+    width={post05Img.width/2}
+    densities={[1.5,2]}
+  />
+
+  <div
+    style={{
+      height: "3000px",
+    }}
+  >
+  </div>
+  <img
+    width="250"
+    height="250"
+    src="/assets/post-01.png"
+    title="Portada del post 1"
+    alt="Portada del post 1"
+    loading="lazy"
+  />
+</MainLayout>

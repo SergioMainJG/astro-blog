@@ -1,16 +1,36 @@
 ---
+import { getCollection } from "astro:content";
+import { SiteConfig } from "../config/site-config";
+import MainLayout from "../layouts/MainLayout.astro";
+import TypedBlogPost from "@/components/TypedBlogPost.astro";
 
+const blogPosts = await getCollection("blog", (post) => !post.data.isDraft);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Sergio's blogs">
+  <!-- component -->
+  <section class="bg-white dark:bg-gray-900">
+    <div class="container px-6 py-10 mx-auto">
+      <div class="flex flex-col gap-5">
+        <h1
+          class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white"
+        >
+          {SiteConfig.title}
+        </h1>
+        <div>
+          <a class="mx-5" href="/blog/1">Blog Páginado</a>
+          <a class="mx-5" href="/authors">Autores</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
+        {blogPosts.map((posts) => <TypedBlogPost post={posts} />)}
+      </div>
+    </div>
+  </section>
+</MainLayout>
+<style>
+  @import "tailwindcss";
+  a {
+    @apply text-blue-500 hover:underline;
+  }
+</style>
